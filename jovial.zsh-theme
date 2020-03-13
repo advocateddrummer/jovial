@@ -34,7 +34,7 @@ rev_parse_find() {
     while [[ ${parent_path} != "/" ]]; do
         if [[ -e ${current_path}/${target} ]]; then
             if $whether_output; then echo "$current_path"; fi
-            return 0; 
+            return 0;
         fi
         current_path="$parent_path"
         parent_path="`command dirname $parent_path`"
@@ -80,9 +80,11 @@ judge_git_dirty () {
 type_tip_pointer() {
     if [[ -n ${REV_GIT_DIR} ]]; then
         if [[ ${IS_GIT_DIRTY} == false ]]; then
-            echo '(๑˃̵ᴗ˂̵)و'
+            #echo '(๑˃̵ᴗ˂̵)و'
+            echo "%{$reset_color%}%{$FG[040]%}${JOVIAL_ARROW}%{$reset_color%}"
         else
-            echo '(ﾉ˚Д˚)ﾉ'
+            #echo '(ﾉ˚Д˚)ﾉ'
+            echo "%{$reset_color%}%{$FG[202]%}${JOVIAL_ARROW}%{$reset_color%}"
         fi
     else
         echo "${JOVIAL_ARROW}"
@@ -187,7 +189,7 @@ dev_env_segment() {
     local SEGMENT_ELEMENTS=(node php python)
     for element in "${SEGMENT_ELEMENTS[@]}"; do
         local segment=`prompt_${element}_version`
-        if [[ -n $segment ]]; then 
+        if [[ -n $segment ]]; then
             echo "$segment "
             break
         fi
