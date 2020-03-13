@@ -186,7 +186,13 @@ prompt_python_version() {
 }
 
 dev_env_segment() {
-    local SEGMENT_ELEMENTS=(node php python)
+    # Cannot define and initialize local/typeset arrays in the same line with
+    # versions of zsh less than or equal to 5.0.2 (I am not sure when this
+    # changed). With version 5.0.1 the 'unknown file attribute' error messages
+    # is displayed if the SEGMENT_ELEMENTS array is defined in the same line,
+    # starting with local, as it is defined.
+    local SEGMENT_ELEMENTS
+    SEGMENT_ELEMENTS=(node php python)
     for element in "${SEGMENT_ELEMENTS[@]}"; do
         local segment=`prompt_${element}_version`
         if [[ -n $segment ]]; then
